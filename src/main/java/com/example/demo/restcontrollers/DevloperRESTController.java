@@ -10,48 +10,47 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.example.demo.entities.Devloper;
 import com.example.demo.entities.Projects;
+import com.example.demo.service.DevloperService;
+import com.example.demo.service.DevloperServiceImpl;
 import com.example.demo.service.ProjectsService;
 
 
 @RestController
-@RequestMapping("/projects")
+@RequestMapping("/devs")
 @CrossOrigin(origins="http://localhost:4200")
-public class ProjectsRESTController {
-	
-	@Autowired
-	ProjectsService projetservice;
+public class DevloperRESTController {
+	@Autowired 
+	DevloperService devloperservice;
 	
 	@RequestMapping(path="all",method = RequestMethod.GET)
-	public List<Projects> getAllProjects() {
-	return projetservice.getAllProjects();
+	public List<Devloper> getAllDevlopers() {
+	return devloperservice.getAllDevlopers();
 	}
 	
+
 	@RequestMapping(value="/{id}",method = RequestMethod.GET)
-	public Projects getProjectsById(@PathVariable("id") Long id) {
-	return projetservice.getProject(id) ;
+	public Devloper getDevloperById(@PathVariable("id") Long id) {
+	return devloperservice.getDevloper(id) ;
 	 }
 	
 	@RequestMapping(method = RequestMethod.POST)
-	public Projects createProject(@RequestBody Projects projects) {
-	return projetservice.saveProject(projects);
+	public Devloper createDevloper(@RequestBody Devloper devloper) {
+	return devloperservice.saveDevloper(devloper);
 	}
+
 	
 	@RequestMapping(method = RequestMethod.PUT)
-	public Projects updateProject(@RequestBody Projects projects) {
-	return projetservice.updateProject(projects);
+	public Devloper updateDevloper(@RequestBody Devloper devloper) {
+	return devloperservice.updateDevloper(devloper);
 	}
 	
 	@RequestMapping(value="/{id}",method = RequestMethod.DELETE)
-	public void deleteProjet(@PathVariable("id") Long id)
+	public void deleteDevloper(@PathVariable("id") Long id)
 	{
-		projetservice.deleteProjectById(id);
+		devloperservice.deleteDevloperById(id);
 	}
 	
-	@RequestMapping(value="/projsdev/{idDev}",method = RequestMethod.GET)
-	public List<Projects> getProjectsByDevId(@PathVariable("idDev") Long idDev) {
-	return projetservice.findByDeveloperIdDev(idDev) ;
-	}
-
 	
 }
